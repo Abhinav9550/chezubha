@@ -17,7 +17,6 @@ class Categories extends Component {
   };
 
   filteruserData2 = (val, callBack) => {
-    debugger;
     callBack(
       this,
       this.state.filterdData.filter(
