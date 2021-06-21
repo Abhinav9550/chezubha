@@ -9,6 +9,7 @@ class Categories extends Component {
       filterdData: [],
       isLoading: false,
       isError: false,
+      active: "1",
     };
   }
 
@@ -17,21 +18,25 @@ class Categories extends Component {
   };
 
   filteruserData2 = (val, callBack) => {
+    //this.setState({ filterdData: this.filteruserData(this.state.active) });
+    var initialFilter = this.filteruserData(this.state.active);
     callBack(
       this,
-      this.state.filterdData.filter(
-        (x) =>
-          x.title.includes(val?.target?.value) ||
-          x.body.includes(val?.target?.value)
-      )
+      val?.target?.value.length
+        ? initialFilter.filter(
+            (x) =>
+              x.title.includes(val?.target?.value) ||
+              x.body.includes(val?.target?.value)
+          )
+        : initialFilter
     );
   };
 
   selectedKey(key, isSearch = false) {
-    var { filterdData } = this.state;
+    var { filterdData, backUpData } = this.state;
     filterdData = this.filteruserData(key, isSearch);
     console.log(filterdData);
-    this.setState({ filterdData: filterdData });
+    this.setState({ filterdData, active: key });
   }
 
   searchKey2(obj, result) {
